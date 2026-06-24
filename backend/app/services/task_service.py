@@ -17,7 +17,10 @@ def get_all_tasks():
 def get_task_by_id(id):
     conn = get_connection()
     cursor = conn.cursor()
-    cursor.execute("SELECT id, title, description, status FROM tasks WHERE id = ?", (id,))
+    cursor.execute(
+        "SELECT id, title, description, status FROM tasks WHERE id = %s",
+        (id,)
+    )
     row = cursor.fetchone()
     cursor.close()
     conn.close()
@@ -29,7 +32,7 @@ def get_task_by_id(id):
 def create_task(data):
     title = data.get("title")
     description = data.get("description")
-    status = data.get("status","PENDIENTE")
+    status = data.get("status", "PENDIENTE")
     conn = get_connection()
     cursor = conn.cursor()
     cursor.execute(
@@ -37,8 +40,39 @@ def create_task(data):
         (title, description, status)
     )
     task_id = cursor.fetchone()[0]
-    coon.commit()
+    conn.commit()
     cursor.close()
     conn.close()
 
     return {"id": task_id, "message": "Tarea registrada correctamente"}
+
+
+def update_task_status(task_id, status):
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute(
+        "UPDATE tasks SET status = %s WHERE id = %s RETURNING id",
+        (status, task_id)
+    )
+    updated_id = cursor.fetchone()
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+    if updated_id:
+        return {"message": "Estado actualizado correctamente"}
+    return None
+
+
+def delete_task(task_id):
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM tasks WHERE id = %s RETURNING id", (task_id,))
+    deleted_id = cursor.fetchone()
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+    if deleted_id:
+        return {"message": "Tarea eliminada correctamente"}
+    return None
