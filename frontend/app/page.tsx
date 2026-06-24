@@ -1,74 +1,125 @@
-export default function Home() {
+﻿import Link from "next/link";
+
+export default function HomePage() {
   return (
     <main
       style={{
         minHeight: "100vh",
-        background: "#f4f6fb",
-        fontFamily: "Arial, sans-serif",
         display: "flex",
-        alignItems: "center",
+        flexDirection: "column",
         justifyContent: "center",
-        padding: "40px",
+        alignItems: "center",
+        background: "linear-gradient(135deg, #f0f4ff 0%, #e5e7eb 100%)",
+        fontFamily: "system-ui, -apple-system, sans-serif",
+        padding: "20px",
       }}
     >
       <section
         style={{
-          background: "white",
-          padding: "45px",
-          borderRadius: "18px",
-          maxWidth: "720px",
+          maxWidth: "650px",
           width: "100%",
-          boxShadow: "0 10px 30px rgba(0,0,0,0.08)",
+          background: "white",
+          padding: "56px 40px",
+          borderRadius: "24px",
+          boxShadow: "0 20px 40px rgba(0,0,0,0.06)",
           textAlign: "center",
+          position: "relative",
+          overflow: "hidden",
         }}
       >
-        <p
+        {/* Elemento decorativo sutil en el fondo de la tarjeta */}
+        <div
           style={{
-            color: "#3b82f6",
-            fontWeight: "bold",
-            marginBottom: "10px",
+            position: "absolute",
+            top: "-50px",
+            right: "-50px",
+            width: "150px",
+            height: "150px",
+            background: "#3b82f6",
+            opacity: "0.05",
+            borderRadius: "50%",
+          }}
+        ></div>
+
+        {/* Etiqueta / Badge superior */}
+        <span
+          style={{
+            display: "inline-block",
+            background: "#eff6ff",
+            color: "#1d4ed8",
+            padding: "8px 20px",
+            borderRadius: "9999px",
+            fontSize: "14px",
+            fontWeight: "700",
+            marginBottom: "24px",
+            letterSpacing: "0.5px",
+            textTransform: "uppercase",
           }}
         >
-          Desarrollo de Aplicaciones Web Avanzadas
-        </p>
+           Universidad de Guayaquil
+        </span>
 
+        {/* Título principal con jerarquía visual */}
         <h1
           style={{
-            fontSize: "42px",
-            marginBottom: "18px",
-            color: "#1f2937",
+            color: "#111827",
+            fontSize: "46px",
+            fontWeight: "800",
+            margin: "0 0 16px",
+            lineHeight: "1.1",
+            letterSpacing: "-1px",
           }}
         >
-          App Académica de Tareas
+          Gestión de Tareas <br />
+          <span style={{ color: "#2563eb" }}>Académicas</span>
         </h1>
 
+        {/* Subtítulo descriptivo */}
         <p
           style={{
-            fontSize: "18px",
             color: "#4b5563",
+            fontSize: "18px",
             lineHeight: "1.6",
-            marginBottom: "30px",
+            marginBottom: "40px",
+            padding: "0 20px",
           }}
         >
-          Plataforma académica para registrar, consultar y dar seguimiento a
-          tareas usando Next.js, Flask, PostgreSQL y Docker.
+          Plataforma centralizada para organizar, registrar y dar seguimiento al
+          estado de los requerimientos y equipos de laboratorio.
         </p>
 
-        <a
+        {/* Botón de llamada a la acción (CTA) */}
+        <Link
           href="/tasks"
           style={{
             display: "inline-block",
             background: "#2563eb",
             color: "white",
-            padding: "14px 24px",
-            borderRadius: "10px",
+            padding: "16px 40px",
+            borderRadius: "14px",
             textDecoration: "none",
-            fontWeight: "bold",
+            fontWeight: "600",
+            fontSize: "18px",
+            boxShadow: "0 8px 20px rgba(37, 99, 235, 0.25)",
+            transition: "transform 0.2s, boxShadow 0.2s",
           }}
         >
-          Ver tareas académicas
-        </a>
+          Comenzar ahora 
+        </Link>
       </section>
+
+      {/* Footer del desarrollador */}
+      <footer
+        style={{
+          marginTop: "48px",
+          color: "#6b7280",
+          fontSize: "14px",
+          textAlign: "center",
+          fontWeight: "500",
+        }}
+      >
+        <p>Proyecto desarrollado por Grupo 4</p>
+      </footer>
     </main>
   );
 }

@@ -6,13 +6,18 @@ export default function TaskForm() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    alert("Tarea registrada correctamente (modo demostración)");
+    await fetch("http://localhost:5000/tasks", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ title, description, status: "PENDIENTE" }),
+    });
 
     setTitle("");
     setDescription("");
+    window.location.reload();
   };
 
   return (
@@ -26,13 +31,10 @@ export default function TaskForm() {
         boxShadow: "0 5px 15px rgba(0,0,0,0.08)",
       }}
     >
-      <h2 style={{ marginBottom: "20px" }}>
-        Registrar nueva tarea
-      </h2>
+      <h2 style={{ marginBottom: "20px" }}>Registrar nueva tarea</h2>
 
       <div style={{ marginBottom: "15px" }}>
         <label>Título</label>
-
         <input
           type="text"
           value={title}
@@ -50,7 +52,6 @@ export default function TaskForm() {
 
       <div style={{ marginBottom: "15px" }}>
         <label>Descripción</label>
-
         <textarea
           value={description}
           onChange={(e) => setDescription(e.target.value)}
