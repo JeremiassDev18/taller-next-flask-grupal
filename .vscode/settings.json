@@ -1,0 +1,10 @@
+{
+    "chat.tools.terminal.autoApprove": {
+        "git remote": true,
+        "git ls-remote": true,
+        "New-Item": true,
+        "Out-Null": true,
+        "git clone": true,
+        "ForEach-Object": true
+    }
+}
